@@ -1,0 +1,90 @@
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+struct Aluno {
+    int id;
+    string nome;
+    string cpf;
+    string matricula;
+    int idade;
+    string genero;
+    string curso;
+    float renda;
+    bool trabalha;
+};
+
+int main() {
+    vector<Aluno> alunos;
+    char continuar;
+    int id = 1; // Inicializa o ID do primeiro aluno como 1
+
+    do {
+        Aluno aluno;
+
+        aluno.id = id++;
+
+        cout << "Cadastro de Aluno" << endl;
+        cout << "-----------------" << endl;
+
+        cout << "Nome: ";
+        getline(cin, aluno.nome);
+
+        cout << "CPF: ";
+        getline(cin, aluno.cpf);
+
+        cout << "Matricula: ";
+        getline(cin, aluno.matricula);
+
+        cout << "Idade: ";
+        cin >> aluno.idade;
+
+        cout << "Gênero: ";
+        cin.ignore();
+        getline(cin, aluno.genero);
+
+        cout << "Trabalha (1 - Sim, 0 - Não): ";
+        cin >> aluno.trabalha;
+
+        if (aluno.trabalha) {
+            cout << "Renda: ";
+            cin >> aluno.renda;
+        }
+
+        cin.ignore(); // Limpa o buffer antes de ler a próxima linha
+
+        cout << "Curso: ";
+        getline(cin, aluno.curso);
+
+        alunos.push_back(aluno); // Adiciona o aluno ao vetor
+
+        cout << "Deseja cadastrar outro aluno? (s/n): ";
+        cin >> continuar;
+        cin.ignore(); // Limpa o buffer antes de ler a próxima linha
+
+    } while (continuar == 's' || continuar == 'S');
+
+    cout << endl;
+    cout << "Cadastro de Alunos Realizado com Sucesso!" << endl;
+    cout << "-----------------------------------------" << endl;
+
+    // Exibindo todos os alunos cadastrados
+    for (size_t i = 0; i < alunos.size(); ++i) {
+        cout << "Aluno " << alunos[i].id << ":" << endl;
+        cout << "Nome: " << alunos[i].nome << endl;
+        cout << "CPF: " << alunos[i].cpf << endl;
+        cout << "Matricula: " << alunos[i].matricula << endl;
+        cout << "Idade: " << alunos[i].idade << endl;
+        cout << "Gênero: " << alunos[i].genero << endl;
+        cout << "Trabalha: " << (alunos[i].trabalha ? "Sim" : "Não") << endl;
+        if (alunos[i].trabalha) {
+            cout << "Renda: " << alunos[i].renda << endl;
+        }
+        cout << "Curso: " << alunos[i].curso << endl;
+        cout << "----------------------" << endl;
+    }
+
+    return 0;
+}
